@@ -5,7 +5,7 @@ import {Image, Text} from 'react-native';
 
 //Utils
 import reactStringReplace from 'react-string-replace';
-import {emojiUnicode} from '../util';
+import emojiUnicode from 'emoji-unicode';
 
 //Styles
 import {StyleSheet} from 'react-native';
@@ -20,7 +20,7 @@ type TwemojiTextProps = {
 };
 
 const EMOJI_REGEX =
-    /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/g;
+    /((?:\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])+)/g;
 
 const TwemojiText: React.VFC<TextProps & TwemojiTextProps> = ({
     twemojiStyle,
@@ -30,24 +30,24 @@ const TwemojiText: React.VFC<TextProps & TwemojiTextProps> = ({
 }) => {
     const textStyle = StyleSheet.flatten(props.style);
 
-    const parts = reactStringReplace(children, EMOJI_REGEX, (emoji, i) => (
-        <Image
-            key={`emoji-${i}`}
-            testID={emoji}
-            style={
-                twemojiStyle ?? {
-                    width: textStyle?.fontSize ?? 14,
-                    height: textStyle?.fontSize ?? 14
+    const parts = reactStringReplace(children, EMOJI_REGEX, (emoji, i) => {
+        const name = emojiUnicode(emoji).replace(/\s/g, '-');
+        return (
+            <Image
+                key={`emoji-${i}`}
+                testID={emoji}
+                style={
+                    twemojiStyle ?? {
+                        width: textStyle?.fontSize ?? 14,
+                        height: textStyle?.fontSize ?? 14
+                    }
                 }
-            }
-            source={{
-                uri:
-                    typeof base === 'function'
-                        ? base(emojiUnicode(emoji))
-                        : `${base}${emojiUnicode(emoji)}.png`
-            }}
-        />
-    ));
+                source={{
+                    uri: typeof base === 'function' ? base(name) : `${base}${name}.png`
+                }}
+            />
+        );
+    });
 
     return (
         <Text testID={'text'} {...props}>
