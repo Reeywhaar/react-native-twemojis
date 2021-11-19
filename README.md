@@ -37,4 +37,20 @@ const Component = () => {
 }
 ```
 
-The `TwemojiText` component accepts all `Text` props by default. If you want to customize the styling of the Twemojis there is a `twemojiStyle` prop which accepts `Image` styling.
+## 🎚 Props
+
+The `TwemojiText` component accepts all `Text` props by default.
+
+### twemojiStyle
+
+*Required*: no, *Default*: empty
+
+If you want to customize the styling of the Twemojis
+
+### base
+
+*Required*: no, *Default*: `https://twemoji.maxcdn.com/2/72x72/`
+
+Dfeault source for image to be taken from.
+Either can be `string`, then source will be `${base}${emojiName}.png`,
+or function `(emojiName: string) => string`, then result of the function is taken

@@ -16,6 +16,7 @@ import {TextProps, ImageStyle} from 'react-native';
 type TwemojiTextProps = {
     twemojiStyle?: ImageStyle;
     children: string;
+    base?: string | ((emoji: string) => string);
 };
 
 const EMOJI_REGEX =
@@ -24,6 +25,7 @@ const EMOJI_REGEX =
 const TwemojiText: React.VFC<TextProps & TwemojiTextProps> = ({
     twemojiStyle,
     children,
+    base = 'https://twemoji.maxcdn.com/2/72x72/',
     ...props
 }) => {
     const textStyle = StyleSheet.flatten(props.style);
@@ -39,7 +41,10 @@ const TwemojiText: React.VFC<TextProps & TwemojiTextProps> = ({
                 }
             }
             source={{
-                uri: `https://twemoji.maxcdn.com/2/72x72/${emojiUnicode(emoji)}.png`
+                uri:
+                    typeof base === 'function'
+                        ? base(emojiUnicode(emoji))
+                        : `${base}${emojiUnicode(emoji)}.png`
             }}
         />
     ));
