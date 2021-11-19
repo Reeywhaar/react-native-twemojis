@@ -1,9 +1,9 @@
 {
-    "name": "react-native-twemojis",
-    "version": "1.0.1",
+    "name": "@reeywhaar/react-native-twemojis",
+    "version": "1.0.2",
     "description": "Replace emojis with Twemojis in your next React Native app.",
     "main": "src/index.ts",
-    "repository": "git@github.com:tomekkleszcz/react-native-twemojis.git",
+    "repository": "git@github.com:reeywhaar/react-native-twemojis.git",
     "author": "tomekkleszcz <tomekkleszcz@icloud.com>",
     "license": "MIT",
     "private": false,
@@ -18,7 +18,8 @@
     ],
     "scripts": {
         "lint": "./node_modules/.bin/eslint ./src/ --ext .js,.jsx,.ts,.tsx",
-        "prepublish": "tsc"
+        "prepublish": "tsc",
+        "test": "exit 0"
     },
     "devDependencies": {
         "@types/react-native": "^0.63.42",
@@ -34,5 +35,8 @@
     "dependencies": {
         "emoji-unicode": "^2.0.1",
         "react-string-replace": "^0.4.4"
+    },
+    "publishConfig": {
+        "@reeywhaar:registry": "https://npm.pkg.github.com"
     }
 }
