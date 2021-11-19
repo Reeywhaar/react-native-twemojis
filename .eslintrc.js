@@ -12,7 +12,7 @@ module.exports = {
     rules: {
         'comma-dangle': 'off',
         'no-spaced-func': 'off',
-        'newline-per-chained-call': ['error'],
+        'newline-per-chained-call': 'off', // conflicts with prettier
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-namespace': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
