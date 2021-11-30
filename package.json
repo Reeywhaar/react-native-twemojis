@@ -1,6 +1,6 @@
 {
     "name": "@reeywhaar/react-native-twemojis",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Replace emojis with Twemojis in your next React Native app.",
     "main": "src/index.ts",
     "repository": "git@github.com:reeywhaar/react-native-twemojis.git",
